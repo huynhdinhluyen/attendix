@@ -40,11 +40,24 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
+    // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.storage)
     implementation(libs.firebase.config)
-    implementation(libs.google.services)
+
+    // Material Design
+    implementation (libs.material)
+
+    // MVVM - ViewModel and LiveData
+    implementation (libs.lifecycle.viewmodel)
+    implementation (libs.lifecycle.livedata)
+
+    // CameraX for easy camera implementation
+    implementation (libs.androidx.camera.camera.core)
+    implementation (libs.androidx.camera.camera2)
+    implementation (libs.androidx.camera.lifecycle)
+    implementation (libs.androidx.camera.view)
 }

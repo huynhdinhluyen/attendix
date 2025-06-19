@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Attendix</string>
+    <string name="attendance_wifi_valid">WiFi hợp lệ</string>
+    <string name="attendance_wifi_ssid">SSID: %1$s</string>
+    <string name="attendance_wifi_invalid">Chưa kết nối đúng WiFi</string>
+    <string name="attendance_permissions_required">Quyền truy cập là bắt buộc để tiếp tục.</string>
+    <string name="attendance_student_id_error">Không thể lấy Mã sinh viên. Vui lòng khởi động lại.</string>
+    <string name="attendance_cancelled">Đã hủy điểm danh.</string>
+    <string name="attendance_success">Điểm danh thành công!</string>
+    <string name="attendance_error">Lỗi: %1$s</string>
+    <string name="attendance_connect_to_wifi">Vui lòng kết nối đúng WiFi của lớp học.</string>
+    <string name="attendance_select_slot">Vui lòng chọn ca học.</string>
 </resources>
