@@ -1,108 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    tools:context=".ui.main.AttendanceFragment">
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Điểm danh"
-        android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="80dp"
+        android:clipToPadding="false">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardWifiStatus"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:cardElevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitle">
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp">
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:paddingTop="40dp"
+            android:paddingBottom="32dp"
+            tools:context=".ui.main.AttendanceFragment">
 
-            <ImageView
-                android:id="@+id/imageViewWifiIcon"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_wifi_off"
-                app:tint="?attr/colorError" />
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/textViewTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_marginTop="16dp"
+                android:text="@string/attend"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+                android:textColor="?attr/colorOnSurface"
+                android:textStyle="bold"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textViewWifiStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chưa kết nối đúng WiFi"
-                    android:textAppearance="@style/TextAppearance.Material3.TitleMedium" />
+            <!-- Content container with max width -->
+            <LinearLayout
+                android:id="@+id/contentContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+                app:layout_constraintWidth_max="400dp">
 
-                <TextView
-                    android:id="@+id/textViewWifiName"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardWifiStatus"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Vui lòng kết nối WiFi lớp học"
-                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+                    app:cardElevation="4dp"
+                    app:cardCornerRadius="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="20dp">
+
+                        <ImageView
+                            android:id="@+id/imageViewWifiIcon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_wifi_off"
+                            android:contentDescription="@string/accessibility_wifi_status"
+                            app:tint="?attr/colorError" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textViewWifiStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/attendance_wifi_invalid"
+                                android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textViewWifiName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/attendance_connect_to_wifi"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                                android:textColor="?attr/colorOnSurfaceVariant" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutSlot"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:hint="@string/accessibility_slot_selector">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewSlot"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:padding="16dp"
+                        android:labelFor="@id/textInputLayoutSlot"
+                        android:importantForAccessibility="yes"
+                        tools:ignore="LabelFor" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/buttonAttend"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/button_attendance"
+                    android:text="@string/attendance_button_text"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:elevation="4dp"
+                    android:contentDescription="@string/accessibility_attendance_button" />
+
             </LinearLayout>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/menuSlot"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:hint="Chọn ca học"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardWifiStatus">
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:contentDescription="@string/accessibility_progress_loading"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <AutoCompleteTextView
-            android:id="@+id/autoCompleteTextViewSlot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </ScrollView>
 
+    <!-- Fixed logout button at bottom -->
     <Button
-        android:id="@+id/buttonAttend"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:padding="16dp"
-        android:text="Mở Camera và Điểm Danh"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/menuSlot" />
+        android:id="@+id/buttonLogout"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:layout_gravity="bottom"
+        android:text="@string/logout"
+        android:textColor="?attr/colorError"
+        android:drawableStart="@drawable/ic_logout"
+        android:drawablePadding="8dp"
+        app:strokeColor="?attr/colorError" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

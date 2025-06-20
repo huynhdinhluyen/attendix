@@ -20,7 +20,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.Calendar;
+import java.util.Locale;
 import java.util.UUID;
 
 public class AttendanceRepository {
@@ -80,21 +80,12 @@ public class AttendanceRepository {
     }
 
     public Task<QuerySnapshot> hasAttendedToday(String userId, String slot) {
-        Calendar startOfDay = Calendar.getInstance();
-        startOfDay.set(Calendar.HOUR_OF_DAY, 0);
-        startOfDay.set(Calendar.MINUTE, 0);
-        startOfDay.set(Calendar.SECOND, 0);
-
-        Calendar endOfDay = Calendar.getInstance();
-        endOfDay.set(Calendar.HOUR_OF_DAY, 23);
-        endOfDay.set(Calendar.MINUTE, 59);
-        endOfDay.set(Calendar.SECOND, 59);
+        String today = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                .format(new java.util.Date());
 
         Query query = attendanceCollection
                 .whereEqualTo("userId", userId)
-                .whereEqualTo("slot", slot)
-                .whereGreaterThanOrEqualTo("timestamp", startOfDay.getTime())
-                .whereLessThanOrEqualTo("timestamp", endOfDay.getTime());
+                .whereEqualTo("slot", slot);
 
         return query.get();
     }

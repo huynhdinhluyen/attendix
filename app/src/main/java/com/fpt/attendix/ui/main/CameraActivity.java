@@ -9,6 +9,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraSelector;
@@ -32,6 +34,20 @@ public class CameraActivity extends AppCompatActivity {
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private ImageCapture imageCapture;
     private PreviewView viewFinder;
+
+    // Replace deprecated startActivityForResult with modern ActivityResultLauncher
+    private final ActivityResultLauncher<Intent> previewLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    // User confirmed the image
+                    String confirmedImageUri = result.getData().getStringExtra(ImagePreviewActivity.EXTRA_CONFIRMED_IMAGE_URI);
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra(EXTRA_IMAGE_URI, confirmedImageUri);
+                    setResult(RESULT_OK, resultIntent);
+                    finish();
+                }
+                // If RESULT_CANCELED, user wants to retake - stay on camera
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,19 +94,7 @@ public class CameraActivity extends AppCompatActivity {
     private void takePhoto() {
         if (imageCapture == null) return;
 
-        String name = "attendix-image-" + System.currentTimeMillis() + ".jpg";
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, name);
-        contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-            contentValues.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/Attendix");
-        }
-
-        ImageCapture.OutputFileOptions outputOptions = new ImageCapture.OutputFileOptions
-                .Builder(getContentResolver(),
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                contentValues)
-                .build();
+        ImageCapture.OutputFileOptions outputOptions = createOutputFileOptions();
 
         imageCapture.takePicture(
                 outputOptions,
@@ -98,10 +102,11 @@ public class CameraActivity extends AppCompatActivity {
                 new ImageCapture.OnImageSavedCallback() {
                     @Override
                     public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
-                        Intent resultIntent = new Intent();
-                        resultIntent.putExtra(EXTRA_IMAGE_URI, Objects.requireNonNull(outputFileResults.getSavedUri()).toString());
-                        setResult(RESULT_OK, resultIntent);
-                        finish();
+                        // Navigate to preview using modern ActivityResultLauncher
+                        Intent previewIntent = new Intent(CameraActivity.this, ImagePreviewActivity.class);
+                        previewIntent.putExtra(ImagePreviewActivity.EXTRA_IMAGE_URI,
+                                Objects.requireNonNull(outputFileResults.getSavedUri()).toString());
+                        previewLauncher.launch(previewIntent);
                     }
 
                     @Override
@@ -113,5 +118,22 @@ public class CameraActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    // Extracted method for creating output file options
+    private ImageCapture.OutputFileOptions createOutputFileOptions() {
+        String name = "attendix-image-" + System.currentTimeMillis() + ".jpg";
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, name);
+        contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+            contentValues.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/Attendix");
+        }
+
+        return new ImageCapture.OutputFileOptions
+                .Builder(getContentResolver(),
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                contentValues)
+                .build();
     }
 }

@@ -36,6 +36,7 @@ dependencies {
 
     implementation(libs.appcompat)
     implementation(libs.material)
+    implementation(libs.firebase.inappmessaging)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -60,4 +61,7 @@ dependencies {
     implementation (libs.androidx.camera.camera2)
     implementation (libs.androidx.camera.lifecycle)
     implementation (libs.androidx.camera.view)
+
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 }

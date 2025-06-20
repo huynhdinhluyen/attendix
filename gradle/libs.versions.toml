@@ -1,7 +1,9 @@
 [versions]
 agp = "8.10.1"
 androidxCameraCore = "1.4.2"
+compiler = "4.16.0"
 firebaseBom = "33.15.0"
+glide = "4.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -9,18 +11,21 @@ appcompat = "1.7.1"
 lifecycleLivedata = "2.9.1"
 lifecycleViewmodel = "2.9.1"
 material = "1.12.0"
+firebaseInappmessaging = "21.0.2"
 
 [libraries]
 androidx-camera-camera-core = { module = "androidx.camera:camera-core", version.ref = "androidxCameraCore" }
 androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "androidxCameraCore" }
 androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "androidxCameraCore" }
 androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "androidxCameraCore" }
+compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-config = { module = "com.google.firebase:firebase-config" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
 firebase-storage = { module = "com.google.firebase:firebase-storage" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -28,6 +33,7 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata", version.ref = "lifecycleLivedata" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "lifecycleViewmodel" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+firebase-inappmessaging = { group = "com.google.firebase", name = "firebase-inappmessaging", version.ref = "firebaseInappmessaging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

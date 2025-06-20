@@ -6,10 +6,20 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!-- Required for getting SSID on newer Android versions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- For Android 15+ - Additional location permissions -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" android:minSdkVersion="29" />
+
+    <!-- Network state permissions -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <!-- For Android 13+ (API 33+) - Needed for notification permissions -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" android:minSdkVersion="33" />
 
     <application
         android:allowBackup="true"
@@ -44,7 +54,10 @@
 
         <activity
             android:name=".ui.main.CameraActivity"
-            android:screenOrientation="portrait"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.main.ImagePreviewActivity"
             android:exported="false" />
 
        </application>

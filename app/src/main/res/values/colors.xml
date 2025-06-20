@@ -18,4 +18,12 @@
     <!-- Specific state colors -->
     <color name="design_default_color_primary">@color/purple_500</color>
     <color name="design_default_color_error">#B00020</color>
+
+    <color name="attendance_primary">#FF9800</color>        <!-- Bright Orange -->
+    <color name="attendance_primary_dark">#F57C00</color>   <!-- Dark Orange -->
+    <color name="attendance_secondary">#FFCC80</color>      <!-- Light Orange -->
+    <color name="attendance_success">#4CAF50</color>        <!-- Green for success -->
+    <color name="attendance_error">#F44336</color>          <!-- Red for error -->
+    <color name="attendance_disabled">#BDBDBD</color>       <!-- Gray for disabled -->
+    <color name="attendance_wifi_valid">#4CAF50</color>     <!-- Green for valid wifi -->
 </resources>

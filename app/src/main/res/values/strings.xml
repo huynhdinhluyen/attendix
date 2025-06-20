@@ -10,4 +10,21 @@
     <string name="attendance_error">Lỗi: %1$s</string>
     <string name="attendance_connect_to_wifi">Vui lòng kết nối đúng WiFi của lớp học.</string>
     <string name="attendance_select_slot">Vui lòng chọn ca học.</string>
+    <string name="attendance_button_text">Mở Camera và Điểm Danh</string>
+    <string name="attendance_already_attended">Đã điểm danh hôm nay</string>
+    <string name="wifi_icon">Wifi icon</string>
+
+    <!-- Accessibility descriptions -->
+    <string name="accessibility_slot_selector">Chọn ca học để điểm danh</string>
+    <string name="accessibility_attendance_button">Nút mở camera để điểm danh</string>
+    <string name="accessibility_progress_loading">Đang xử lý điểm danh</string>
+    <string name="accessibility_wifi_status">Biểu tượng trạng thái WiFi</string>
+    <string name="attend">Điểm danh</string>
+    <string name="capture_photo">Capture photo</string>
+    <string name="preview_image">Preview image</string>
+    <string name="capture_again">Chụp lại</string>
+    <string name="confirm">Xác nhận</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="logout_confirmation">Bạn có chắc chắn muốn đăng xuất?</string>
+    <string name="cancel">Hủy</string>
 </resources>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".ui.main.CameraActivity">
 
     <androidx.camera.view.PreviewView
@@ -15,15 +16,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <Button
-        android:id="@+id/image_capture_button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="50dp"
-        android:elevation="2dp"
-        android:text="Chụp"
+    <!-- Bottom control panel -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Spacer for balance -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1" />
+
+        <!-- Capture Button -->
+        <Button
+            android:id="@+id/image_capture_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/circle_capture_button"
+            android:elevation="8dp"
+            android:text=""
+            android:contentDescription="@string/capture_photo" />
+
+        <!-- Spacer for balance -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
