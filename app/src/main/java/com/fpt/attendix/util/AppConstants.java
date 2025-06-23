@@ -13,7 +13,7 @@ public class AppConstants {
             "FPTU_Students_NVH",
             "@huynhdinhluyen",
             "Wi-MESH 2.4G",
-            "AMERICANO COFFEE"
+            "AndroidWifi"
     );
 
     public static final List<String> ALLOWED_SLOTS = Arrays.asList(

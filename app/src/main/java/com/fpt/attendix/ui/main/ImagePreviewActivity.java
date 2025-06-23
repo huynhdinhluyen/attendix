@@ -37,7 +37,6 @@ public class ImagePreviewActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_image_preview);
 
-        // Initialize views
         imageViewPreview = findViewById(R.id.imageViewPreview);
         buttonRetake = findViewById(R.id.buttonRetake);
         buttonConfirm = findViewById(R.id.buttonConfirm);

@@ -35,18 +35,15 @@ public class CameraActivity extends AppCompatActivity {
     private ImageCapture imageCapture;
     private PreviewView viewFinder;
 
-    // Replace deprecated startActivityForResult with modern ActivityResultLauncher
     private final ActivityResultLauncher<Intent> previewLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    // User confirmed the image
                     String confirmedImageUri = result.getData().getStringExtra(ImagePreviewActivity.EXTRA_CONFIRMED_IMAGE_URI);
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra(EXTRA_IMAGE_URI, confirmedImageUri);
                     setResult(RESULT_OK, resultIntent);
                     finish();
                 }
-                // If RESULT_CANCELED, user wants to retake - stay on camera
             });
 
     @Override
@@ -120,7 +117,6 @@ public class CameraActivity extends AppCompatActivity {
         );
     }
 
-    // Extracted method for creating output file options
     private ImageCapture.OutputFileOptions createOutputFileOptions() {
         String name = "attendix-image-" + System.currentTimeMillis() + ".jpg";
         ContentValues contentValues = new ContentValues();

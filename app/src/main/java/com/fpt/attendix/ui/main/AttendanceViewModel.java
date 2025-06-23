@@ -130,11 +130,10 @@ public class AttendanceViewModel extends AndroidViewModel {
             String currentSsid = wifiInfo.getSSID();
             String currentBssid = wifiInfo.getBSSID();
 
-            // Handle Android 15+ restrictions with smart validation
             if (currentSsid == null || currentSsid.equals("<unknown ssid>") || currentSsid.equals("\"<unknown ssid>\"")) {
 
                 if (AppConstants.ENABLE_SMART_WIFI_VALIDATION && isWifiConnectionValid(wifiInfo)) {
-                    _wifiStatus.postValue(new WifiCheckResult(true, "Valid Network (Android 15+ Mode)"));
+                    _wifiStatus.postValue(new WifiCheckResult(true, "Valid Network"));
                 } else {
                     _wifiStatus.postValue(new WifiCheckResult(false, "Cannot verify Wi-Fi network"));
                 }
@@ -222,7 +221,6 @@ public class AttendanceViewModel extends AndroidViewModel {
         // 1. Check if already attended
         attendanceRepository.hasAttendedToday(userId, slot).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                // Filter for today manually in app code
                 Calendar startOfDay = Calendar.getInstance();
                 startOfDay.set(Calendar.HOUR_OF_DAY, 0);
                 startOfDay.set(Calendar.MINUTE, 0);
